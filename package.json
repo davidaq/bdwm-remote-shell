@@ -1,6 +1,6 @@
 {
   "name": "bdwm-remote-shell",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "start a service for running scripts over ssh",
   "main": "executor.js",
   "scripts": {

@@ -77,6 +77,15 @@ function uid () {
 }
 
 function requestHandler (req, res) {
+  if (req.method === 'OPTOINS') {
+    res.writeHead(200, {
+      'access-control-allow-origin': '*',
+      'access-control-allow-methods': 'GET, POST',
+      'access-control-allow-headers': 'content-type, x-requested-with, x-requested-by',
+    });
+    res.end();
+    return;
+  }
   const url = parseurl(`http://${req.headers.host}${req.url}`);
   const handler = route[url.pathname];
   if (typeof handler === 'string') {
