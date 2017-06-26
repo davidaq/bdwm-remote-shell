@@ -1,0 +1,18 @@
+{
+  "name": "bdwm-remote-shell",
+  "version": "1.0.0",
+  "description": "start a service for running scripts over ssh",
+  "main": "executor.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "bin":{
+    "remote-shell-server": "bin/remote-shell-server"
+  },
+  "author": "davidaq",
+  "license": "ISC",
+  "dependencies": {
+    "simple-ssh": "^0.9.0"
+  }
+}

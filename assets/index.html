@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Remote shell</title>
+  </head>
+  <body>
+    <pre>
+      Usage:
+
+      &lt;script src="http://..../remote-shell.js"&gt;&lt;/script&gt;
+      &lt;script&gt;
+        RemoteShell.execute({
+          server: '127.0.0.1',
+          port: 22,
+          user: 'root',
+          pass: '',
+          script: 'ls',
+          onOutput: function (message, type) {
+            if (type === 'error') {
+              console.error(message);
+            } else if (type === 'info') {
+              console.info(message);
+            } else {
+              console.log(message);
+            }
+          },
+          onFinish: function (exitCode) {
+
+          },
+        });
+      &lt;/script&gt;
+    </pre>
+  </body>
+</html>
