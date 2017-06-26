@@ -41,6 +41,9 @@
         var data = JSON.parse(event.data);
         options.onOutput(data.message, data.type);
       });
+      sse.addEventListener('error', function (event) {
+        options.onError(new Error(event.data));
+      });
     })
     .catch(function (err) {
       options.onError(err);

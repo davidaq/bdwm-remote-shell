@@ -19,10 +19,10 @@ const ssh = new SSH({
 ssh.exec('cat | bash -x', {
   pty: true,
   in: options.script,
-  exit: function (code) {
+  exit: (code) => {
     process.exit(code);
   },
-  out: function (message) {
+  out: (message) => {
     process.send({
       event: 'output',
       data: JSON.stringify({
@@ -31,7 +31,7 @@ ssh.exec('cat | bash -x', {
       }),
     });
   },
-  err: function (message) {
+  err: (message) => {
     process.send({
       event: 'output',
       data: JSON.stringify({
@@ -41,10 +41,10 @@ ssh.exec('cat | bash -x', {
     });
   },
 }).start({
-  fail: function () {
+  fail: () => {
     process.send({
-      event: 'fail',
-      data: 'fail',
+      event: 'error',
+      data: 'SSH connection failure',
     });
   },
 });
