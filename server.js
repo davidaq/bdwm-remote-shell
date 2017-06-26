@@ -12,6 +12,10 @@ const route = {
   '/': 'index.html',
   '/remote-shell.js': 'client.js',
   '/prepare': (req, res, url) => {
+    res.writeHead(200, {
+      'access-control-allow-origin': '*',
+      'content-type': 'text/plain; charset=utf-8',
+    });
     const chunks = [];
     req.on('data', chunk => {
       chunks.push(chunk);
@@ -28,6 +32,7 @@ const route = {
   },
   '/listen': (req, res, url) => {
     res.writeHead(200, {
+      'access-control-allow-origin': '*',
       'content-type': 'text/event-stream; charset=utf-8',
     });
     const id = url.search ? url.search.substr(1) : '';
