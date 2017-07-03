@@ -70,6 +70,31 @@ const route = {
       });
     }
   },
+  '/execute': (req, res, url) => {
+    res.writeHead(200, {
+      'access-control-allow-origin': '*',
+      'content-type': 'text/plain; charset=utf-8',
+    });
+    const chunks = [];
+    req.on('data', chunk => {
+      chunks.push(chunk);
+    });
+    req.on('end', () => {
+      const options = Buffer.concat(chunks).toString();
+      const process = cp.fork(require.resolve('./executor'), [options]);
+      process.on('message', message => {
+        if (message.event) {
+          if (message.event === 'output') {
+            res.write(JSON.parse(message.data).message);
+            res.write('\n');
+          }
+        }
+      });
+      process.on('close', code => {
+        res.end(`\nEnded with code ${code}`);
+      });
+    });
+  },
 };
 
 function uid () {

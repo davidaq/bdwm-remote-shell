@@ -17,7 +17,7 @@ const ssh = new SSH({
 });
 
 ssh.exec('cat | bash -x', {
-  pty: true,
+  // pty: true,
   in: options.script,
   exit: (code) => {
     process.exit(code);
