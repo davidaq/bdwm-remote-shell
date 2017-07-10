@@ -86,7 +86,6 @@ const route = {
         if (message.event) {
           if (message.event === 'output') {
             res.write(JSON.parse(message.data).message);
-            res.write('\n');
           }
         }
       });
@@ -102,8 +101,10 @@ function uid () {
 }
 
 function requestHandler (req, res) {
-  if (req.method === 'OPTOINS') {
+  console.log(req.method, req.url);
+  if (req.method === 'OPTIONS') {
     res.writeHead(200, {
+      'x-server': 'cicily',
       'access-control-allow-origin': '*',
       'access-control-allow-methods': 'GET, POST',
       'access-control-allow-headers': 'content-type, x-requested-with, x-requested-by',
