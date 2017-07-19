@@ -10,6 +10,11 @@ process.send({
 
 const options = JSON.parse(process.argv[2]);
 
+const ipMatch = options.server.match(/\(([0-9]+\.[0-9]+\.[0-9]+\.[0-9]+)\)$/);
+if (ipMatch) {
+    options.server = ipMatch[1];
+}
+
 const ssh = new SSH({
     host: options.server,
     user: options.user,
